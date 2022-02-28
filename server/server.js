@@ -43,7 +43,6 @@ app.use(express.static("build"));
 
 // App Set //
 const PORT = process.env.PORT || 5500;
-app.express();
 app.set("port", PORT);
 /** Listen * */
 app.listen(PORT, () => {
