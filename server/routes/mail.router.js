@@ -6,7 +6,13 @@ const cors = require("cors");
 const nodemailer = require("nodemailer");
 
 const { google } = require("googleapis");
-const OAuth2 = google.auth.OAuth2;
+
+router.post("/", cors(), async (req, res) => {
+  console.log("email post route hit");
+  console.log(req.body.email);
+  let email = req.body.email;
+  
+  const OAuth2 = google.auth.OAuth2;
 const oauth2Client = new OAuth2(
   process.env.OAUTH_CLIENT_ID,
   process.env.OAUTH_CLIENT_SECRET,
@@ -18,11 +24,6 @@ oauth2Client.setCredentials({
 });
 
 const accessToken = oauth2Client.getAccessToken();
-
-router.post("/", cors(), async (req, res) => {
-  console.log("email post route hit");
-  console.log(req.body.email);
-  let email = req.body.email;
 
   let transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
